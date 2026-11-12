@@ -48,3 +48,4 @@ In the original the only way to answer it was to scan the whole end-of-day repor
 to take the live loan list from `getLoans()` and filter it, which is the leak from the
 diagnosis. Now the answer is one safe call. It returns a read-only snapshot, so asking
 the question can't change any records.
+

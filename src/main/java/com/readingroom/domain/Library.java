@@ -70,7 +70,7 @@ public final class Library {
      */
     public Loan returnItem(LendingItem item) {
         if (!items.contains(item)) {
-            throw new LendingException("Unknown item: " + item.title());
+            throw new LendingException("Unknown item: " + item.title(), item);
         }
         item.receiveBack(); // throws if the item is not on loan
         var loan = loans.stream()
@@ -108,10 +108,10 @@ public final class Library {
 
     private void requireRegistered(Member member, LendingItem item) {
         if (!members.contains(member)) {
-            throw new LendingException("Unknown member: " + member.name());
+            throw new LendingException("Unknown member: " + member.name(), item);
         }
         if (!items.contains(item)) {
-            throw new LendingException("Unknown item: " + item.title());
+            throw new LendingException("Unknown item: " + item.title(), item);
         }
     }
 }

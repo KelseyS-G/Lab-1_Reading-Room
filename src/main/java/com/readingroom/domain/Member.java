@@ -3,13 +3,9 @@ package com.readingroom.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 /** A library member. Valid from construction; history can be read but not edited from outside. */
 public final class Member {
-    private static final AtomicInteger NEXT_ID = new AtomicInteger(1);
-
-    private final int id;
     private final String name;
     private final MemberType type;
     private final List<String> history = new ArrayList<>();
@@ -21,13 +17,8 @@ public final class Member {
         if (type == null) {
             throw new IllegalArgumentException("Member type must not be null");
         }
-        this.id = NEXT_ID.getAndIncrement();
         this.name = name;
         this.type = type;
-    }
-
-    public int id() {
-        return id;
     }
 
     public String name() {

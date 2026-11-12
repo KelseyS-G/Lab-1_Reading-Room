@@ -6,6 +6,8 @@ public final class BookItem extends LendingItem {
         super(title);
     }
 
+    // The label is what the end-of-day report has always printed for a book, so it
+    // stays "BOOK" to keep the output identical to the original program.
     @Override
     public String typeLabel() {
         return "BOOK";

@@ -1,7 +1,6 @@
 package com.readingroom.domain;
 
 import java.util.Optional;
-import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Something the library lends. This class OWNS the lending rule:
@@ -15,9 +14,6 @@ import java.util.concurrent.atomic.AtomicInteger;
  * bypass the rule.
  */
 public abstract class LendingItem {
-    private static final AtomicInteger NEXT_ID = new AtomicInteger(1);
-
-    private final int id;
     private final String title;
     private Member borrower; // null = available
 
@@ -25,7 +21,6 @@ public abstract class LendingItem {
         if (title == null || title.isBlank()) {
             throw new IllegalArgumentException("Item title must not be blank");
         }
-        this.id = NEXT_ID.getAndIncrement();
         this.title = title;
     }
 
@@ -34,10 +29,6 @@ public abstract class LendingItem {
 
     /** Loan period in days for a standard member. */
     protected abstract int baseLoanDays();
-
-    public int id() {
-        return id;
-    }
 
     public String title() {
         return title;
@@ -54,14 +45,14 @@ public abstract class LendingItem {
     /** Package-private: only Library (same package) can move an item, and only through these guards. */
     void lendTo(Member member) {
         if (borrower != null) {
-            throw new LendingException("\"" + title + "\" is already on loan to " + borrower.name());
+            throw new LendingException("\"" + title + "\" is already on loan to " + borrower.name(), this);
         }
         borrower = member;
     }
 
     void receiveBack() {
         if (borrower == null) {
-            throw new LendingException("\"" + title + "\" is not on loan");
+            throw new LendingException("\"" + title + "\" is not on loan", this);
         }
         borrower = null;
     }

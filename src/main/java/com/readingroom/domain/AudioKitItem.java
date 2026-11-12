@@ -6,6 +6,7 @@ public final class AudioKitItem extends LendingItem {
         super(title);
     }
 
+    // Same label the original report printed, kept so the output stays identical.
     @Override
     public String typeLabel() {
         return "AUDIO_KIT";

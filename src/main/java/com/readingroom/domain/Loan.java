@@ -3,7 +3,8 @@ package com.readingroom.domain;
 /**
  * One lending of one item to one member. Holds real references (not title strings),
  * so a loan always points at exactly the item and member it was made for.
- * Only the domain can create or close a loan.
+ * Only {@link Library} creates or closes a loan (the constructor and
+ * {@code markReturned} are package-private), so the loan rules live in one place.
  */
 public final class Loan {
     public enum Status { ACTIVE, RETURNED }
@@ -46,6 +47,9 @@ public final class Loan {
     }
 
     void markReturned() {
+        if (status == Status.RETURNED) {
+            throw new IllegalStateException("Loan #" + id + " is already returned");
+        }
         status = Status.RETURNED;
     }
 }

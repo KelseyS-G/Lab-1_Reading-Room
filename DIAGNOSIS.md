@@ -42,6 +42,8 @@ code costs volunteers time; a wrong loan record costs the library its books.
 
 ## Planned structure
 
+Sketch: `/design-sketch.png`.
+
 - **`LendingItem`** (abstract) owns the rule. It keeps one private `borrower`, and
   the status comes from that. `BookItem` and `AudioKitItem` only supply their loan period.
 - **`MemberType`** (enum) holds the student rule once.

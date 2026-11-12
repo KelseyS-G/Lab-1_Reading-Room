@@ -4,7 +4,11 @@ import com.readingroom.domain.Library;
 import com.readingroom.domain.Loan;
 import com.readingroom.domain.LendingItem;
 
-/** Presentation only: turns domain objects into the end-of-day report text. */
+/**
+ * Presentation only: turns domain objects into the end-of-day report text.
+ * It reads the library through {@code items()} and {@code activeLoans()}, which return
+ * read-only snapshots, so printing can never change the domain.
+ */
 public final class ReportPrinter {
     private ReportPrinter() {
     }
